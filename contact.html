@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Dharaneesh N</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Dharaneesh N</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Contact Section – Centered Alignment -->
+  <section class="section contact">
+    <div class="container">
+      <h1 class="section-title">Get In Touch</h1>
+      <CENTER><p class="contact-desc">Open for internships, collaborations, or coffee chats on tech/data. Based in Coimbatore – let's connect!</p></CENTER><BR>
+      
+      <!-- Form – Centered, Equal Inputs -->
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+        <div class="form-row"> <!-- New row class for alignment -->
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-row">
+          <input type="text" name="subject" placeholder="Subject">
+        </div>
+        <div class="form-row">
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        </div>
+        <div class="form-buttons"> <!-- Centered buttons -->
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </div>
+      </form>
+
+      <!-- Social Links – Centered Bar with Logos -->
+      <div class="social-bar"> <!-- New bar for full-width alignment -->
+        <a href="mailto:dharaneesh0530@gmail.com" class="social-link" target="_blank">
+          <i class="fab fa-google" aria-label="Gmail"></i> <!-- Gmail logo -->
+          <span>dharaneesh0530@gmail.com</span>
+        </a>
+        <a href="https://github.com/Dharaneesh30" class="social-link" target="_blank">
+          <i class="fab fa-github"></i>
+          <span>github.com/Dharaneesh30</span>
+        </a>
+        <a href="https://www.linkedin.com/in/dharaneesh-n-292b30317?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app " class="social-link" target="_blank">
+          <i class="fab fa-linkedin"></i>
+          <span>linkedin.com/in/dharaneesh-n</span>
+        </a>
+        <a href="tel:+919489240892" class="social-link">
+          <i class="fas fa-phone"></i>
+          <span>+91 94892 40892</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy;Last Updated November 2025 Dharaneesh N. Crafted with <i class="fas fa-heart accent"></i> in Coimbatore. | <a href="index.html">Back to Home</a></p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
