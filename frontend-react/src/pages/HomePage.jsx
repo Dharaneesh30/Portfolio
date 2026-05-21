@@ -1,109 +1,118 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FaPhone, FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa'
+import { FaPhone, FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+
+const education = [
+  {
+    school: 'Coimbatore Institute of Technology',
+    degree: 'M.Sc Decision and Computing Sciences',
+    years: '2024 - 2029',
+    gpa: 'CGPA: 7.4/10',
+  },
+  {
+    school: "St. Joseph's HSS",
+    degree: 'Higher Secondary (12th Grade)',
+    years: '2022 - 2024',
+    gpa: 'Score: 92%',
+  },
+]
+
+const skills = [
+  'Frontend Development',
+  'React',
+  'Python',
+  'FastAPI',
+  'Flask',
+  'Java',
+  'C',
+  'Digital Marketing',
+  'AI Tools',
+  'WordPress',
+  'Data Analysis',
+]
+
+const workshops = [
+  'Web Development Masterclass',
+  'AI & Machine Learning Fundamentals',
+  'React Advanced Concepts',
+  'Full Stack Development',
+  'Digital Marketing Strategy',
+]
+
+const certifications = [
+  'React Certification - Udemy',
+  'Python for Data Science - Coursera',
+  'Web Design Certificate - Google',
+  'AI Tools Specialist - LinkedIn Learning',
+  'FastAPI Backend Development',
+  'Flutter Basics - Udemy',
+  'Digital Marketing Fundamentals',
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+}
 
 export default function HomePage() {
-  const education = [
-    {
-      school: 'CIT Coimbatore',
-      degree: 'M.Sc Information Technology',
-      years: '2024 - 2029',
-      gpa: 'CGPA: 7.5/10'
-    },
-    {
-      school: "St. Joseph's HSS",
-      degree: 'Higher Secondary (12th Grade)',
-      years: '2022 - 2024',
-      gpa: 'Score: 92%'
-    }
-  ]
-
-  const skills = [
-    'Front End Developer', 'Python', 'React', 'FastAPI', 'Flask',
-    'Java', 'C', 'Digital Marketing', 'AI Tools', 'WordPress', 'Data Analysis'
-  ]
-
-  const workshops = [
-    'Web Development Masterclass',
-    'AI & Machine Learning Fundamentals',
-    'React Advanced Concepts',
-    'Full Stack Development',
-    'Digital Marketing Strategy'
-  ]
-
-  const certifications = [
-    'React Certification - Udemy',
-    'Python for Data Science - Coursera',
-    'Web Design Certificate - Google',
-    'AI Tools Specialist - LinkedIn Learning',
-    'FastAPI Backend Development',
-    'Flutter Basics - Udemy',
-    'Digital Marketing Fundamentals'
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="page-container pt-32"
+      className="page-container"
+      data-page="home"
     >
-      {/* Profile Section */}
       <motion.section
-        className="section"
+        className="hero-card"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+        animate="visible"
       >
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'center' }}>
-          {/* Photo Placeholder */}
-          <motion.div
-            variants={itemVariants}
-            style={{
-              width: '250px',
-              height: '250px',
-              borderRadius: '50%',
-              border: '2px solid #00FF41',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#0d0d0d',
-              boxShadow: '0 0 30px rgba(0, 255, 65, 0.3)',
-              margin: '0 auto'
-            }}
-          >
-            <span style={{ fontSize: '3rem', color: '#888888' }}>[ Your Photo Here ]</span>
+        <div className="hero-grid">
+          <motion.div variants={itemVariants} className="profile-photo-shell profile-photo-square-shell">
+            <img src="/Profile.jpeg" alt="Dharaneesh N" className="profile-image" />
           </motion.div>
 
-          {/* Bio */}
           <motion.div variants={itemVariants}>
-            <h1 style={{ marginBottom: '1rem' }}>Dharaneesh N</h1>
-            <p style={{ marginBottom: '0.5rem', color: '#e0e0e0' }}>📍 Coimbatore, Tamil Nadu, India</p>
-            <div style={{ marginBottom: '1.5rem', display: 'flex', gap: '1rem' }}>
-              <a href="tel:9489240892" className="icon-link"><FaPhone /> 9489240892</a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="icon-link"><FaLinkedin /> LinkedIn</a>
-              <a href="https://github.com/dharaneesh30" target="_blank" rel="noreferrer" className="icon-link"><FaGithub /> GitHub</a>
+            <p className="eyebrow">About Me</p>
+            <h1 className="hero-title">Dharaneesh N</h1>
+            <p className="hero-subtitle">
+              Full-stack developer focused on clean interfaces, practical systems, and modern web tools.
+            </p>
+
+            <div className="contact-pills">
+              <span className="icon-link static-pill">
+                <FaMapMarkerAlt /> Coimbatore, Tamil Nadu, India
+              </span>
+              <a href="tel:9489240892" className="icon-link">
+                <FaPhone /> 9489240892
+              </a>
+              <a href="mailto:dharaneesh0530@gmail.com" className="icon-link">
+                <FaEnvelope /> Email
+              </a>
+              <a href="https://www.linkedin.com/in/dharaneesh-n-292b30317" target="_blank" rel="noreferrer" className="icon-link">
+                <FaLinkedin /> LinkedIn
+              </a>
+              <a href="https://github.com/Dharaneesh30" target="_blank" rel="noreferrer" className="icon-link">
+                <FaGithub /> GitHub
+              </a>
             </div>
-            <p style={{ color: '#e0e0e0', lineHeight: '1.8' }}>
-              Passionate tech enthusiast and full-stack developer with expertise in React, Python, and modern web technologies. 
-              Committed to building innovative solutions and continuous learning.
+
+            <p className="intro-copy">
+              Passionate tech enthusiast with experience in React, Python, FastAPI, and frontend design.
+              I enjoy building useful products, improving user experience, and learning through real projects.
             </p>
           </motion.div>
         </div>
@@ -111,40 +120,36 @@ export default function HomePage() {
 
       <div className="green-divider" />
 
-      {/* Education Section */}
       <motion.section
         className="section"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+        animate="visible"
       >
-        <h2 className="section-heading">EDUCATION</h2>
-        <div style={{ display: 'grid', gap: '1.5rem' }}>
-          {education.map((edu, idx) => (
-            <motion.div key={idx} className="card" variants={itemVariants}>
-              <h3 style={{ marginBottom: '0.5rem' }}>{edu.school}</h3>
-              <p style={{ color: '#e0e0e0', marginBottom: '0.5rem' }}>{edu.degree}</p>
-              <p style={{ color: '#888888', fontSize: '0.9rem' }}>{edu.years} • {edu.gpa}</p>
-            </motion.div>
+        <h2 className="section-heading">Education</h2>
+        <div className="education-grid">
+          {education.map((edu) => (
+            <motion.article key={edu.school} className="card" variants={itemVariants}>
+              <h3>{edu.school}</h3>
+              <p>{edu.degree}</p>
+              <p className="muted">{edu.years} | {edu.gpa}</p>
+            </motion.article>
           ))}
         </div>
       </motion.section>
 
       <div className="green-divider" />
 
-      {/* Skills Section */}
       <motion.section
         className="section"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+        animate="visible"
       >
-        <h2 className="section-heading">SKILLS</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
-          {skills.map((skill, idx) => (
-            <motion.span key={idx} className="skill-pill" variants={itemVariants}>
+        <h2 className="section-heading">Skills</h2>
+        <div className="skills-container">
+          {skills.map((skill) => (
+            <motion.span key={skill} className="skill-pill" variants={itemVariants}>
               {skill}
             </motion.span>
           ))}
@@ -153,40 +158,36 @@ export default function HomePage() {
 
       <div className="green-divider" />
 
-      {/* Workshops Section */}
       <motion.section
         className="section"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+        animate="visible"
       >
-        <h2 className="section-heading">WORKSHOPS & TRAINING</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-          {workshops.map((workshop, idx) => (
-            <motion.div key={idx} className="card" variants={itemVariants} style={{ textAlign: 'center' }}>
+        <h2 className="section-heading">Workshops And Training</h2>
+        <div className="workshops-grid">
+          {workshops.map((workshop) => (
+            <motion.article key={workshop} className="card center-card" variants={itemVariants}>
               <p>{workshop}</p>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </motion.section>
 
       <div className="green-divider" />
 
-      {/* Certifications Section */}
       <motion.section
         className="section"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+        animate="visible"
       >
-        <h2 className="section-heading">CERTIFICATIONS</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-          {certifications.map((cert, idx) => (
-            <motion.div key={idx} className="card" variants={itemVariants} style={{ textAlign: 'center' }}>
-              <p>{cert}</p>
-            </motion.div>
+        <h2 className="section-heading">Certifications</h2>
+        <div className="certifications-grid">
+          {certifications.map((certification) => (
+            <motion.article key={certification} className="card center-card" variants={itemVariants}>
+              <p>{certification}</p>
+            </motion.article>
           ))}
         </div>
       </motion.section>

@@ -1,156 +1,135 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa'
+
+const projects = [
+  {
+    title: 'Yugam',
+    description: 'Modern front-end UI with responsive design and smooth animation details.',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'FIR Management System',
+    description: 'Desktop application for organizing FIR records and improving report handling.',
+    technologies: ['Python', 'GUI'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'Restaurant Order Management',
+    description: 'Order management system designed with data structures for faster operations.',
+    technologies: ['C', 'Linked List', 'Queue'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'Doctor-Patient-Pharmacy System',
+    description: 'Healthcare workflow project connecting doctors, patients, and pharmacies.',
+    technologies: ['Java', 'GUI', 'Database'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'LifeEcho - LifePath AI',
+    description: 'Digital marketing campaign built with design tools, content strategy, and AI support.',
+    technologies: ['Digital Marketing', 'WordPress', 'Canva', 'AI Tools'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'Meeting Notes Summarizer',
+    description: 'AI-assisted utility that helps condense meeting notes into useful summaries.',
+    technologies: ['Python', 'GUI', 'AI Tools'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'YAAL - Intern On Full Stack',
+    description: 'Full-stack application for internship management and team workflows.',
+    technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Backend'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'ValorEdge AI',
+    description: 'Analytics-focused platform for extracting insights from data workflows.',
+    technologies: ['Python', 'React', 'FastAPI'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'CloudMatrix',
+    description: 'Scalable cloud-oriented solution with algorithm-heavy backend logic.',
+    technologies: ['Python', 'Flask', 'React', 'Algorithms'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+  {
+    title: 'CredLens',
+    description: 'Financial analytics concept featuring credit scoring and decision support.',
+    technologies: ['Python', 'React', 'FastAPI', 'Finance'],
+    githubLink: 'https://github.com/Dharaneesh30',
+  },
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+}
 
 export default function ProjectsPage() {
-  const projects = [
-    {
-      title: 'Yugam',
-      description: 'Modern front-end UI with responsive design and smooth animations',
-      technologies: ['HTML', 'CSS', 'JavaScript'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'FIR Management System',
-      description: 'Desktop application for managing FIR records and reports',
-      technologies: ['Python', 'GUI'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'Restaurant Order Management',
-      description: 'Efficient order management system using data structures',
-      technologies: ['C', 'Linked List', 'Queue'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'Doctor-Patient-Pharmacy System',
-      description: 'Healthcare management system connecting doctors, patients, and pharmacies',
-      technologies: ['Java', 'GUI', 'Database'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'LifeEcho - LifePath AI',
-      description: 'Digital marketing campaign using AI tools and design',
-      technologies: ['Digital Marketing', 'WordPress', 'Canva', 'AI Tools'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'Meeting Notes Summarizer',
-      description: 'AI-powered tool to summarize meeting notes automatically',
-      technologies: ['Python', 'GUI', 'AI Tools'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'YAAL - Intern On Full Stack',
-      description: 'Full-stack web application for internship management',
-      technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Backend'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'ValorEdge AI',
-      description: 'Advanced AI platform for data analysis and insights',
-      technologies: ['Python', 'React', 'FastAPI'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'CloudMatrix',
-      description: 'Scalable cloud-based solution with advanced algorithms',
-      technologies: ['Python', 'Flask', 'React', 'Advanced Algorithms'],
-      githubLink: 'https://github.com/dharaneesh30'
-    },
-    {
-      title: 'CredLens',
-      description: 'Financial analytics platform with credit scoring algorithms',
-      technologies: ['Python', 'React', 'FastAPI', 'Financial Algorithms'],
-      githubLink: 'https://github.com/dharaneesh30'
-    }
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="page-container pt-32"
+      className="page-container"
+      data-page="projects"
     >
-      <h2 className="section-heading">MY PROJECTS</h2>
+      <section className="hero-card compact-hero">
+        <p className="eyebrow">Projects</p>
+        <h1 className="hero-title">Selected Work</h1>
+        <p className="hero-subtitle wide-copy">
+          A collection of academic, full-stack, UI, and AI-assisted projects that show both development and product thinking.
+        </p>
+      </section>
 
       <motion.div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem',
-          marginTop: '3rem'
-        }}
+        className="project-grid"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+        animate="visible"
       >
-        {projects.map((project, idx) => (
-          <motion.div
-            key={idx}
-            className="card"
+        {projects.map((project) => (
+          <motion.article
+            key={project.title}
+            className="card project-card"
             variants={itemVariants}
-            whileHover={{ y: -10 }}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem'
-            }}
+            whileHover={{ y: -6 }}
           >
-            <h3 style={{ marginBottom: '0.5rem' }}>{project.title}</h3>
-            <p style={{ color: '#e0e0e0', flex: 1 }}>{project.description}</p>
-            
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-              {project.technologies.map((tech, i) => (
-                <span key={i} style={{
-                  fontSize: '0.8rem',
-                  backgroundColor: 'rgba(0, 255, 65, 0.1)',
-                  color: '#00FF41',
-                  padding: '0.25rem 0.75rem',
-                  borderRadius: '12px',
-                  border: '1px solid #00FF41'
-                }}>
+            <div className="project-copy">
+              <h3 className="project-title">{project.title}</h3>
+              <p className="project-description">{project.description}</p>
+            </div>
+
+            <div className="project-tags">
+              {project.technologies.map((tech) => (
+                <span key={tech} className="project-tag">
                   {tech}
                 </span>
               ))}
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', marginTop: 'auto' }}>
-              <a
-                href={project.githubLink}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  color: '#00FF41',
-                  transition: 'all 0.3s',
-                  textDecoration: 'none'
-                }}
-              >
-                <FaGithub /> Code
+            <div className="project-actions">
+              <a href={project.githubLink} target="_blank" rel="noreferrer" className="icon-link action-link">
+                <FaGithub /> View Code
               </a>
             </div>
-          </motion.div>
+          </motion.article>
         ))}
       </motion.div>
     </motion.div>

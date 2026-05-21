@@ -2,40 +2,126 @@ import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
 import html2pdf from 'html2pdf.js'
 
+const education = [
+  {
+    school: 'Coimbatore Institute of Technology, Coimbatore',
+    degree: 'M.Sc Decision and Computing Science',
+    years: '2024 - 2029',
+    score: 'CGPA: 7.4/10',
+  },
+  {
+    school: "St. Joseph's Matric Higher Secondary School, Ondipudur, Coimbatore",
+    degree: 'Higher Secondary',
+    years: '2022 - 2024',
+    score: '82%',
+  },
+]
+
+const skills = [
+  'Front End Page Developer',
+  'Basic Data Analysis',
+]
+
+const projects = [
+  {
+    title: 'Project on Yugam way to your career Front end UI page',
+    stack: 'HTML, CSS, Basic JavaScript',
+  },
+  {
+    title: 'FIR Management system and Crime Analysis',
+    stack: 'Python with GUI',
+  },
+  {
+    title: 'Restaurant Order Management System',
+    stack: 'Linked List with Queue in C',
+  },
+  {
+    title: 'Secure Doctor Patient Prescription and Pharmacy Management System',
+    stack: 'Java with GUI',
+  },
+  {
+    title: 'LifeEcho - A LifePath AI',
+    stack: 'Digital Marketing Tools, WordPress, Canva, AI tools',
+  },
+  {
+    title: 'Meeting Notes Summarizer',
+    stack: 'Python with GUI, AI tools',
+  },
+  {
+    title: 'YAAL - Intern On Full Stack',
+    stack: 'React.js, Tailwind CSS, JavaScript (ES6+), Custom CSS Animations',
+  },
+  {
+    title: 'ValorEdge AI',
+    stack: 'Python, React, FastAPI',
+  },
+  {
+    title: 'CloudMatrix',
+    stack: 'Python, Flask, React, Algorithms',
+  },
+  {
+    title: 'CredLens',
+    stack: 'Python, React, FastAPI, Finance',
+  },
+]
+
+const workshops = [
+  'Digital Marketing Workshop at Techgyan',
+  'AI Integrated Digital Marketing Workshop at CIT',
+  'Linux Workshop by FOSS CIT',
+  'Host Yourself 101 Workshop by FOSS CIT',
+  'Hands On Flask Workshop by FOSS CIT',
+]
+
+const certifications = [
+  'Data Science at Orizo Internship and Training',
+  'Melnia Hackathon at CIT - Round 1 participant',
+  'Principles of Management',
+  'Data Science in Python - NPTEL',
+  'Digital Marketing Hackathon at Techgyan',
+  'Website Building Hands-on at Coursera Project Network',
+  'Search Engine Optimization Hands-on at Coursera Project Network',
+]
+
+const extracurricular = [
+  'Joint Secretary at FOSS CIT',
+  'Social Media Manager at FOSS CIT',
+]
+
 export default function ResumePage() {
-  const resumeRef = useRef()
+  const resumeRef = useRef(null)
 
   const downloadResume = () => {
-    const element = resumeRef.current
-    const opt = {
-      margin: 10,
-      filename: 'Dharaneesh_N_Resume.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-    }
-    html2pdf().set(opt).from(element).save()
+    if (!resumeRef.current) return
+
+    html2pdf()
+      .set({
+        margin: 10,
+        filename: 'Dharaneesh_N_Resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' },
+      })
+      .from(resumeRef.current)
+      .save()
   }
-
-  const education = [
-    { school: 'CIT Coimbatore', degree: 'M.Sc Information Technology', years: '2024 - 2029', gpa: 'CGPA: 7.5/10' },
-    { school: "St. Joseph's HSS", degree: 'Higher Secondary (12th Grade)', years: '2022 - 2024', gpa: 'Score: 92%' }
-  ]
-
-  const skills = ['Front End Developer', 'Python', 'React', 'FastAPI', 'Flask', 'Java', 'C', 'Digital Marketing', 'AI Tools', 'WordPress', 'Data Analysis']
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="page-container pt-32"
+      className="page-container"
+      data-page="resume"
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h2 className="section-heading" style={{ margin: 0 }}>MY RESUME</h2>
+      <div className="page-header-row">
+        <div>
+          <p className="eyebrow">Resume</p>
+          <h1 className="hero-title small-title">Professional Snapshot</h1>
+        </div>
         <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
           className="btn"
           onClick={downloadResume}
         >
@@ -43,85 +129,88 @@ export default function ResumePage() {
         </motion.button>
       </div>
 
-      <motion.div
+      <motion.section
         ref={resumeRef}
-        className="card"
-        initial={{ opacity: 0, y: 20 }}
+        className="card resume-shell"
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        style={{
-          padding: '2rem',
-          backgroundColor: '#000000',
-          border: '1px solid #00FF41'
-        }}
+        transition={{ duration: 0.45 }}
       >
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem', borderBottom: '1px solid #00FF41', paddingBottom: '1rem' }}>
-          <h1 style={{ margin: '0 0 0.5rem 0' }}>DHARANEESH N</h1>
-          <p style={{ margin: '0 0 0.5rem 0', color: '#e0e0e0' }}>📍 Coimbatore, Tamil Nadu, India</p>
-          <p style={{ margin: 0, color: '#e0e0e0' }}>📱 9489240892 | 💼 LinkedIn | 🐙 GitHub: dharaneesh30</p>
+        <div className="resume-header">
+          <h2>Dharaneesh N</h2>
+          <p>M.Sc Decision and Computing Science</p>
+          <p>Phone: 9489240892 | LinkedIn: Dharaneesh N | GitHub: dharaneesh30</p>
         </div>
 
-        {/* Professional Summary */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <h3 style={{ marginBottom: '0.5rem', borderBottom: '1px solid #00FF41', paddingBottom: '0.5rem' }}>PROFESSIONAL SUMMARY</h3>
-          <p style={{ color: '#e0e0e0', margin: '0.5rem 0' }}>
-            Passionate tech enthusiast and full-stack developer with expertise in React, Python, and modern web technologies. 
-            Experienced in building innovative solutions and committed to continuous learning and technological advancement.
+        <div className="resume-section">
+          <h3>Profile</h3>
+          <p>
+            A visionary tech enthusiast from Coimbatore Institute of Technology, blending innovation with leadership.
+            A soft-spoken strategist who thrives on collaboration, creativity, and out-of-the-box thinking to drive impactful solutions.
           </p>
         </div>
 
-        {/* Education */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <h3 style={{ marginBottom: '0.5rem', borderBottom: '1px solid #00FF41', paddingBottom: '0.5rem' }}>EDUCATION</h3>
-          {education.map((edu, idx) => (
-            <div key={idx} style={{ marginBottom: '0.75rem' }}>
-              <p style={{ margin: '0.25rem 0', color: '#00FF41', fontWeight: 'bold' }}>{edu.school}</p>
-              <p style={{ margin: '0.25rem 0', color: '#e0e0e0' }}>{edu.degree}</p>
-              <p style={{ margin: '0.25rem 0', color: '#888888', fontSize: '0.9rem' }}>{edu.years} • {edu.gpa}</p>
+        <div className="resume-section">
+          <h3>Education</h3>
+          {education.map((item) => (
+            <div key={item.school} className="resume-item">
+              <p className="resume-item-title">{item.school}</p>
+              <p>{item.degree}</p>
+              <p className="muted">{item.years} | {item.score}</p>
             </div>
           ))}
         </div>
 
-        {/* Skills */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <h3 style={{ marginBottom: '0.5rem', borderBottom: '1px solid #00FF41', paddingBottom: '0.5rem' }}>SKILLS</h3>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-            {skills.map((skill, idx) => (
-              <span key={idx} style={{
-                fontSize: '0.85rem',
-                color: '#00FF41',
-                backgroundColor: 'rgba(0, 255, 65, 0.1)',
-                padding: '0.25rem 0.75rem',
-                borderRadius: '12px',
-                border: '1px solid #00FF41'
-              }}>
+        <div className="resume-section">
+          <h3>Projects</h3>
+          <ul className="resume-list rich-resume-list">
+            {projects.map((project) => (
+              <li key={project.title}>
+                <span className="resume-project-title">{project.title}</span>
+                <span className="resume-project-stack">Tech stack: {project.stack}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="resume-section">
+          <h3>Skills</h3>
+          <div className="project-tags">
+            {skills.map((skill) => (
+              <span key={skill} className="project-tag">
                 {skill}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Projects Highlight */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <h3 style={{ marginBottom: '0.5rem', borderBottom: '1px solid #00FF41', paddingBottom: '0.5rem' }}>NOTABLE PROJECTS</h3>
-          <ul style={{ marginLeft: '1.5rem', color: '#e0e0e0' }}>
-            <li>Yugam - Front End UI | HTML, CSS, JavaScript</li>
-            <li>FIR Management System | Python, GUI</li>
-            <li>YAAL - Full Stack Internship Platform | React, Tailwind CSS</li>
-            <li>ValorEdge AI | Python, React, FastAPI</li>
-            <li>CloudMatrix | Python, Flask, React</li>
-            <li>CredLens | Financial Analytics Platform</li>
+        <div className="resume-section">
+          <h3>Workshops</h3>
+          <ul className="resume-list">
+            {workshops.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </div>
 
-        {/* TODO Comments for User */}
-        <div style={{ marginTop: '2rem', padding: '1rem', backgroundColor: '#0d0d0d', border: '1px dashed #00FF41', borderRadius: '4px' }}>
-          <p style={{ color: '#888888', fontSize: '0.9rem', margin: 0 }}>
-            📝 TODO: Update with your personal information, actual LinkedIn/GitHub links, EmailJS API key, and more project details
-          </p>
+        <div className="resume-section">
+          <h3>Certifications</h3>
+          <ul className="resume-list">
+            {certifications.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </div>
-      </motion.div>
+
+        <div className="resume-section">
+          <h3>Extra Curricular</h3>
+          <ul className="resume-list">
+            {extracurricular.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </motion.section>
     </motion.div>
   )
 }

@@ -26,19 +26,21 @@ export default function Navbar() {
         zIndex: 100,
         backdropFilter: 'blur(10px)',
         borderBottom: '1px solid #00FF41',
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        boxShadow: '0 0 20px rgba(0, 255, 65, 0.1)'
+        backgroundColor: 'rgba(0, 0, 0, 0.78)',
+        boxShadow: '0 0 20px rgba(0, 255, 65, 0.1)',
       }}
     >
-      <div style={{
-        maxWidth: '1400px',
-        margin: '0 auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1rem 2rem'
-      }}>
-        {/* Logo */}
+      <div
+        style={{
+          maxWidth: '1400px',
+          margin: '0 auto',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '1rem 2rem',
+          gap: '1rem',
+        }}
+      >
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -48,32 +50,38 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             gap: '0.75rem',
-            fontFamily: 'Orbitron'
+            fontFamily: 'Orbitron',
+            minWidth: 0,
           }}
         >
-          <div style={{
-            width: '40px',
-            height: '40px',
-            border: '2px solid #00FF41',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '4px',
-            color: '#00FF41',
-            fontWeight: 'bold',
-            boxShadow: '0 0 15px rgba(0, 255, 65, 0.3)'
-          }}>
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              border: '2px solid #00FF41',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '4px',
+              color: '#00FF41',
+              fontWeight: 'bold',
+              boxShadow: '0 0 15px rgba(0, 255, 65, 0.3)',
+              flexShrink: 0,
+            }}
+          >
             DN
           </div>
           <span style={{ color: '#00FF41', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em' }}>Dharaneesh</span>
         </motion.div>
 
-        {/* Desktop Menu */}
-        <div style={{
-          display: 'none',
-          gap: '2rem',
-          alignItems: 'center'
-        }} className="desktop-menu">
+        <div
+          style={{
+            display: 'none',
+            gap: '2rem',
+            alignItems: 'center',
+          }}
+          className="desktop-menu"
+        >
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.to}
@@ -83,12 +91,12 @@ export default function Navbar() {
                 textDecoration: 'none',
                 fontFamily: 'Rajdhani',
                 fontWeight: 600,
-                padding: '0.5rem 1rem',
+                padding: '0.6rem 1rem',
                 borderRadius: '4px',
                 backgroundColor: isActive ? '#00FF41' : 'transparent',
                 border: `1px solid ${isActive ? '#00FF41' : 'transparent'}`,
                 transition: 'all 0.3s',
-                fontSize: '0.95rem'
+                fontSize: '0.95rem',
               })}
             >
               {item.label}
@@ -96,39 +104,37 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
         <motion.button
           whileTap={{ scale: 0.95 }}
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMenuOpen((open) => !open)}
           style={{
             background: 'transparent',
             border: '1px solid #00FF41',
             color: '#00FF41',
-            padding: '0.5rem 0.75rem',
+            padding: '0.5rem 0.9rem',
             borderRadius: '4px',
-            fontSize: '1.2rem',
+            fontSize: '0.95rem',
             cursor: 'pointer',
-            boxShadow: '0 0 10px rgba(0, 255, 65, 0.2)'
+            boxShadow: '0 0 10px rgba(0, 255, 65, 0.2)',
           }}
           className="mobile-menu-btn"
         >
-          {menuOpen ? '✕' : '☰'}
+          {menuOpen ? 'Close' : 'Menu'}
         </motion.button>
       </div>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
           style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            backgroundColor: 'rgba(0, 0, 0, 0.92)',
             borderTop: '1px solid #00FF41',
             padding: '1rem 2rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.5rem'
+            gap: '0.5rem',
           }}
           className="mobile-menu"
         >
@@ -146,7 +152,7 @@ export default function Navbar() {
                 borderRadius: '4px',
                 backgroundColor: isActive ? '#00FF41' : 'transparent',
                 border: `1px solid ${isActive ? '#00FF41' : 'rgba(0, 255, 65, 0.3)'}`,
-                transition: 'all 0.3s'
+                transition: 'all 0.3s',
               })}
             >
               {item.label}
@@ -160,9 +166,11 @@ export default function Navbar() {
           .desktop-menu {
             display: flex !important;
           }
+
           .mobile-menu-btn {
             display: none !important;
           }
+
           .mobile-menu {
             display: none !important;
           }
@@ -171,4 +179,3 @@ export default function Navbar() {
     </motion.nav>
   )
 }
-

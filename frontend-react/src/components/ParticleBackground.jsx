@@ -26,6 +26,8 @@ export default function ParticleBackground({ isStartPage }) {
       })
     }
 
+    let animationFrameId = 0
+
     const animate = () => {
       ctx.fillStyle = '#000000'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -63,7 +65,7 @@ export default function ParticleBackground({ isStartPage }) {
         }
       }
 
-      requestAnimationFrame(animate)
+      animationFrameId = requestAnimationFrame(animate)
     }
 
     animate()
@@ -74,7 +76,10 @@ export default function ParticleBackground({ isStartPage }) {
     }
 
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      cancelAnimationFrame(animationFrameId)
+    }
   }, [isStartPage])
 
   return (
@@ -85,7 +90,10 @@ export default function ParticleBackground({ isStartPage }) {
         top: 0,
         left: 0,
         zIndex: 0,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        width: '100vw',
+        height: '100vh',
+        opacity: isStartPage ? 1 : 0.75,
       }}
     />
   )
