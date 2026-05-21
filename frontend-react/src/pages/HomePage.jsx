@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaPhone, FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+import profileImage from '../../Profile.jpeg'
 
 const education = [
   {
@@ -82,7 +83,7 @@ export default function HomePage() {
       >
         <div className="hero-grid">
           <motion.div variants={itemVariants} className="profile-photo-shell profile-photo-square-shell">
-            <img src="/Profile.jpeg" alt="Dharaneesh N" className="profile-image" />
+            <img src={profileImage} alt="Dharaneesh N" className="profile-image" />
           </motion.div>
 
           <motion.div variants={itemVariants}>

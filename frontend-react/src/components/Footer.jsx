@@ -25,7 +25,7 @@ export default function Footer() {
       >
         <div className="footer-layout">
           <div>
-            <p className="footer-copy"> Created By Dharaneesh N | {lastUpdated} | React, Vite, Three.js</p>
+            <p className="footer-copy">Created by Dharaneesh N | {lastUpdated} | React, Vite, Three.js</p>
           </div>
         </div>
       </div>

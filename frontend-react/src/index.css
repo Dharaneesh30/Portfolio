@@ -265,6 +265,16 @@ textarea {
   font-size: 1.05rem;
 }
 
+.intro-copy,
+.project-description,
+.resume-section p,
+.resume-list li,
+.footer-copy,
+.footer-value,
+.contact-value {
+  color: #dedede;
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
@@ -289,7 +299,7 @@ textarea {
   object-fit: cover;
   box-shadow: 0 0 30px rgba(0, 255, 65, 0.22);
   background: #0d0d0d;
-  object-position: center 72%;
+  object-position: center 36%;
 }
 
 .contact-pills {
@@ -342,6 +352,7 @@ textarea {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.25rem;
+  align-items: stretch;
 }
 
 .center-card {
@@ -354,24 +365,34 @@ textarea {
   min-height: 100%;
   padding: 1.8rem;
   gap: 1.2rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .project-copy {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  min-height: 150px;
+  min-height: 158px;
 }
 
 .project-title {
   margin: 0;
   line-height: 1.2;
-  min-height: 3.2em;
+  min-height: 3.4em;
+  text-wrap: balance;
 }
 
 .project-description {
   margin: 0;
-  color: #d0d0d0;
+  color: #d8d8d8;
+  line-height: 1.8;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: flex-start;
 }
 
 .project-actions {
@@ -380,6 +401,7 @@ textarea {
 
 .action-link {
   width: fit-content;
+  margin-top: 0.25rem;
 }
 
 .page-header-row {
@@ -392,6 +414,7 @@ textarea {
 
 .resume-shell {
   gap: 1.5rem;
+  padding: 2rem;
 }
 
 .resume-header {
@@ -403,7 +426,7 @@ textarea {
 .resume-section {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.8rem;
 }
 
 .resume-item {
@@ -419,6 +442,7 @@ textarea {
 
 .resume-list {
   padding-left: 1.25rem;
+  line-height: 1.75;
 }
 
 .resume-list li + li {
@@ -479,6 +503,22 @@ textarea {
 .footer-copy {
   max-width: 42rem;
   margin-top: 0.2rem;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
+.nav-inner {
+  width: min(1400px, 100%);
+}
+
+.brand-name {
+  white-space: nowrap;
+}
+
+.nav-link,
+.mobile-nav-link {
+  letter-spacing: 0.03em;
 }
 
 .contact-layout {
@@ -517,7 +557,7 @@ textarea {
 }
 
 .contact-form-shell {
-  gap: 0.9rem;
+  gap: 1rem;
 }
 
 .form-title {
@@ -527,6 +567,31 @@ textarea {
 .success-text {
   color: #00ff41;
   text-align: center;
+}
+
+.contact-quote {
+  margin: 2rem auto 0;
+  max-width: 42rem;
+  text-align: center;
+  color: #b9ffcb;
+  font-style: italic;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.contact-quote-heading {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00ff41;
+  font-style: normal;
+  text-shadow: 0 0 18px rgba(0, 255, 65, 0.24);
+}
+
+.contact-quote-line {
+  color: #cffff0;
 }
 
 .muted {
@@ -628,6 +693,14 @@ textarea {
   .footer-meta {
     text-align: left;
   }
+
+  .project-copy {
+    min-height: 0;
+  }
+
+  .project-title {
+    min-height: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -654,5 +727,63 @@ textarea {
 
   .start-model {
     height: 240px;
+  }
+
+  .nav-inner {
+    padding: 0.9rem 1rem !important;
+  }
+
+  .brand-name {
+    font-size: 1rem !important;
+  }
+
+  .brand-mark {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .mobile-menu {
+    padding: 0.85rem 1rem !important;
+  }
+
+  .project-card {
+    padding: 1.2rem;
+  }
+
+  .project-tags {
+    gap: 0.55rem;
+  }
+
+  .project-tag {
+    font-size: 0.88rem;
+    min-height: 2.75rem;
+  }
+
+  .resume-shell {
+    padding: 1.25rem;
+  }
+
+  .resume-header p,
+  .resume-section p,
+  .resume-list li {
+    font-size: 0.98rem;
+  }
+
+  .footer-copy {
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .btn,
+  .icon-link,
+  .project-card {
+    transition: none !important;
   }
 }

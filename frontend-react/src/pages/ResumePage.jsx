@@ -36,7 +36,7 @@ const projects = [
     stack: 'Linked List with Queue in C',
   },
   {
-    title: 'Secure Doctor Patient Prescription and Pharmacy Management System',
+    title: 'MediSync-Secure Doctor Patient Prescription and Pharmacy Management System',
     stack: 'Java with GUI',
   },
   {

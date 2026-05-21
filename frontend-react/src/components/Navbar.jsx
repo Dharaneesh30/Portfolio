@@ -31,6 +31,7 @@ export default function Navbar() {
       }}
     >
       <div
+        className="nav-inner"
         style={{
           maxWidth: '1400px',
           margin: '0 auto',
@@ -42,6 +43,7 @@ export default function Navbar() {
         }}
       >
         <motion.div
+          className="brand-lockup"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate('/home')}
@@ -55,6 +57,7 @@ export default function Navbar() {
           }}
         >
           <div
+            className="brand-mark"
             style={{
               width: '40px',
               height: '40px',
@@ -71,7 +74,7 @@ export default function Navbar() {
           >
             DN
           </div>
-          <span style={{ color: '#00FF41', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em' }}>Dharaneesh</span>
+          <span className="brand-name" style={{ color: '#00FF41', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em' }}>Dharaneesh</span>
         </motion.div>
 
         <div
@@ -86,6 +89,7 @@ export default function Navbar() {
             <NavLink
               key={item.to}
               to={item.to}
+              className="nav-link"
               style={({ isActive }) => ({
                 color: isActive ? '#000000' : '#00FF41',
                 textDecoration: 'none',
@@ -143,6 +147,7 @@ export default function Navbar() {
               key={item.to}
               to={item.to}
               onClick={() => setMenuOpen(false)}
+              className="mobile-nav-link"
               style={({ isActive }) => ({
                 color: isActive ? '#000000' : '#00FF41',
                 textDecoration: 'none',

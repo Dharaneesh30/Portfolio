@@ -146,6 +146,16 @@ export default function ContactPage() {
           )}
         </motion.form>
       </div>
+
+      <motion.p
+        className="contact-quote"
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.15 }}
+      >
+        <span className="contact-quote-heading">Thank You</span>
+        <span className="contact-quote-line">“No duty is more urgent than that of returning thanks.” — James Allen</span>
+      </motion.p>
     </motion.div>
   )
 }
