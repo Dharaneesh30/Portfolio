@@ -33,21 +33,18 @@ const skills = [
 ]
 
 const workshops = [
-  'Web Development Masterclass',
-  'AI & Machine Learning Fundamentals',
-  'React Advanced Concepts',
-  'Full Stack Development',
   'Digital Marketing Strategy',
+  'Linux',
+  'Git & GitHub'
+  'Html5Up & Start Bootstrap'
 ]
 
 const certifications = [
-  'React Certification - Udemy',
-  'Python for Data Science - Coursera',
-  'Web Design Certificate - Google',
-  'AI Tools Specialist - LinkedIn Learning',
-  'FastAPI Backend Development',
-  'Flutter Basics - Udemy',
-  'Digital Marketing Fundamentals',
+  'Digital Marketing Hackathon - IIT Madras',
+  'Python for Data Science - NPTEL',
+  'Data Science Training & Internship - Corizo',
+  'Web Design Certificate - Coursera',
+  'Lead Generation Messenger Chatbot - Coursera'
 ]
 
 const containerVariants = {
