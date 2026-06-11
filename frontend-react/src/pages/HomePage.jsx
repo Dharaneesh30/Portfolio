@@ -35,7 +35,7 @@ const skills = [
 const workshops = [
   'Digital Marketing Strategy',
   'Linux',
-  'Git & GitHub'
+  'Git & GitHub',
   'Html5Up & Start Bootstrap'
 ]
 
