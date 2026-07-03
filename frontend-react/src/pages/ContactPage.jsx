@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa'
 
@@ -10,29 +10,53 @@ const contactInfo = [
   { icon: FaGithub, label: 'GitHub', value: 'Dharaneesh30', link: 'https://github.com/Dharaneesh30' },
 ]
 
+const contactEmail = 'dharaneesh0530@gmail.com'
+const formEndpoint = `https://formsubmit.co/ajax/${contactEmail}`
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
-
-  const mailtoLink = useMemo(() => {
-    const params = new URLSearchParams({
-      subject: formData.subject || 'Portfolio enquiry',
-      body: `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
-    })
-
-    return `mailto:dharaneesh0530@gmail.com?${params.toString()}`
-  }, [formData])
+  const [status, setStatus] = useState({ type: 'idle', message: '' })
 
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    window.location.href = mailtoLink
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 5000)
+    setStatus({ type: 'sending', message: 'Sending your message...' })
+
+    try {
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _replyto: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _subject: `Portfolio message: ${formData.subject}`,
+          _captcha: 'false',
+          _template: 'table',
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Message could not be sent')
+      }
+
+      setFormData({ name: '', email: '', subject: '', message: '' })
+      setStatus({ type: 'success', message: 'Thanks! Your message has been sent.' })
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: 'Something went wrong. Please email me directly at dharaneesh0530@gmail.com.',
+      })
+    }
   }
 
   return (
@@ -96,7 +120,7 @@ export default function ContactPage() {
         >
           <h2 className="form-title">Send A Message</h2>
           <p className="form-copy">
-            This form opens your default email app with the message details filled in.
+            Messages sent here go directly to my inbox.
           </p>
 
           <input
@@ -135,14 +159,15 @@ export default function ContactPage() {
           <motion.button
             type="submit"
             className="btn"
+            disabled={status.type === 'sending'}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Open Email Draft
+            {status.type === 'sending' ? 'Sending...' : 'Send Message'}
           </motion.button>
 
-          {submitted && (
-            <p className="success-text">Your email draft should now be open.</p>
+          {status.message && (
+            <p className={status.type === 'error' ? 'error-text' : 'success-text'}>{status.message}</p>
           )}
         </motion.form>
       </div>
