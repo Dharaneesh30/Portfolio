@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CustomCursor from './components/CustomCursor'
@@ -30,6 +31,7 @@ export default function App(){
         </main>
         {!isStartPage && <Footer />}
       </div>
+      <SpeedInsights />
     </>
   )
 }
