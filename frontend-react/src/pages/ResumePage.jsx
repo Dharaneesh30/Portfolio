@@ -1,6 +1,9 @@
 import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
 import html2pdf from 'html2pdf.js'
+import MagnetButton from '../components/reactbits/MagnetButton'
+import ShinyText from '../components/reactbits/ShinyText'
+import SplitText from '../components/reactbits/SplitText'
 
 const education = [
   {
@@ -117,16 +120,17 @@ export default function ResumePage() {
       <div className="page-header-row">
         <div>
           <p className="eyebrow">Resume</p>
-          <h1 className="hero-title small-title">Professional Snapshot</h1>
+          <SplitText as="h1" className="hero-title small-title" text="Professional Snapshot" />
         </div>
-        <motion.button
+        <MagnetButton
+          as={motion.button}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           className="btn"
           onClick={downloadResume}
         >
-          Download PDF
-        </motion.button>
+          <ShinyText>Download PDF</ShinyText>
+        </MagnetButton>
       </div>
 
       <motion.section

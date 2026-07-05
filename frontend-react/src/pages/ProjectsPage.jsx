@@ -1,6 +1,9 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub } from 'react-icons/fa'
+import MagnetButton from '../components/reactbits/MagnetButton'
+import SplitText from '../components/reactbits/SplitText'
+import SpotlightCard from '../components/reactbits/SpotlightCard'
 
 const projects = [
   {
@@ -92,7 +95,7 @@ export default function ProjectsPage() {
     >
       <section className="hero-card compact-hero">
         <p className="eyebrow">Projects</p>
-        <h1 className="hero-title">Selected Work</h1>
+        <SplitText as="h1" className="hero-title" text="Selected Work" />
         <p className="hero-subtitle wide-copy">
           A collection of academic, full-stack, UI, and AI-assisted projects that show both development and product thinking.
         </p>
@@ -105,7 +108,8 @@ export default function ProjectsPage() {
         animate="visible"
       >
         {projects.map((project) => (
-          <motion.article
+          <SpotlightCard
+            as={motion.article}
             key={project.title}
             className="card project-card"
             variants={itemVariants}
@@ -125,11 +129,13 @@ export default function ProjectsPage() {
             </div>
 
             <div className="project-actions">
-              <a href={project.githubLink} target="_blank" rel="noreferrer" className="icon-link action-link">
-                <FaGithub /> View Code
-              </a>
+              <MagnetButton as={motion.div} strength={0.18}>
+                <a href={project.githubLink} target="_blank" rel="noreferrer" className="icon-link action-link">
+                  <FaGithub /> View Code
+                </a>
+              </MagnetButton>
             </div>
-          </motion.article>
+          </SpotlightCard>
         ))}
       </motion.div>
     </motion.div>

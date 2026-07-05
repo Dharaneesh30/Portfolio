@@ -85,7 +85,7 @@ export default function HomePage() {
 
           <motion.div variants={itemVariants}>
             <p className="eyebrow">About Me</p>
-            <h1 className="hero-title">Dharaneesh N</h1>
+            <SplitText as="h1" className="hero-title" text="Dharaneesh N" />
             <p className="hero-subtitle">
               Full-stack developer focused on clean interfaces, practical systems, and modern web tools.
             </p>
@@ -124,14 +124,20 @@ export default function HomePage() {
         initial="hidden"
         animate="visible"
       >
-        <h2 className="section-heading">Education</h2>
+        <SplitText as="h2" className="section-heading" text="Education" />
         <div className="education-grid">
           {education.map((edu) => (
-            <motion.article key={edu.school} className="card" variants={itemVariants}>
+            <SpotlightCard as={motion.article} key={edu.school} className="card" variants={itemVariants}>
               <h3>{edu.school}</h3>
               <p>{edu.degree}</p>
-              <p className="muted">{edu.years} | {edu.gpa}</p>
-            </motion.article>
+              <p className="muted">
+                {edu.years} | {edu.school.includes('Institute') ? (
+                  <>CGPA: <CountUp value={7.4} decimals={1} suffix="/10" /></>
+                ) : (
+                  <>Score: <CountUp value={92} suffix="%" /></>
+                )}
+              </p>
+            </SpotlightCard>
           ))}
         </div>
       </motion.section>
@@ -144,12 +150,12 @@ export default function HomePage() {
         initial="hidden"
         animate="visible"
       >
-        <h2 className="section-heading">Skills</h2>
+        <SplitText as="h2" className="section-heading" text="Skills" />
         <div className="skills-container">
           {skills.map((skill) => (
-            <motion.span key={skill} className="skill-pill" variants={itemVariants}>
+            <AnimatedContent as={motion.span} key={skill} className="skill-pill" variants={itemVariants}>
               {skill}
-            </motion.span>
+            </AnimatedContent>
           ))}
         </div>
       </motion.section>
@@ -162,12 +168,12 @@ export default function HomePage() {
         initial="hidden"
         animate="visible"
       >
-        <h2 className="section-heading">Workshops And Training</h2>
+        <SplitText as="h2" className="section-heading" text="Workshops And Training" />
         <div className="workshops-grid">
           {workshops.map((workshop) => (
-            <motion.article key={workshop} className="card center-card" variants={itemVariants}>
+            <SpotlightCard as={motion.article} key={workshop} className="card center-card" variants={itemVariants}>
               <p>{workshop}</p>
-            </motion.article>
+            </SpotlightCard>
           ))}
         </div>
       </motion.section>
@@ -180,12 +186,12 @@ export default function HomePage() {
         initial="hidden"
         animate="visible"
       >
-        <h2 className="section-heading">Certifications</h2>
+        <SplitText as="h2" className="section-heading" text="Certifications" />
         <div className="certifications-grid">
           {certifications.map((certification) => (
-            <motion.article key={certification} className="card center-card" variants={itemVariants}>
+            <SpotlightCard as={motion.article} key={certification} className="card center-card" variants={itemVariants}>
               <p>{certification}</p>
-            </motion.article>
+            </SpotlightCard>
           ))}
         </div>
       </motion.section>

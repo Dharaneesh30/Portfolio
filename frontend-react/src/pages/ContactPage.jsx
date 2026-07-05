@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa'
+import MagnetButton from '../components/reactbits/MagnetButton'
+import SplitText from '../components/reactbits/SplitText'
+import SpotlightCard from '../components/reactbits/SpotlightCard'
 
 const contactInfo = [
   { icon: FaPhone, label: 'Phone', value: '9489240892', link: 'tel:9489240892' },
@@ -69,7 +72,7 @@ export default function ContactPage() {
     >
       <section className="hero-card compact-hero">
         <p className="eyebrow">Contact</p>
-        <h1 className="hero-title">Let&apos;s Connect</h1>
+        <SplitText as="h1" className="hero-title" text="Let's Connect" />
         <p className="hero-subtitle wide-copy">
           Reach out for collaborations, internships, freelance opportunities, or project discussions.
         </p>
@@ -91,7 +94,8 @@ export default function ContactPage() {
 
             if (info.link) {
               return (
-                <a
+                <SpotlightCard
+                  as="a"
                   key={info.label}
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
@@ -99,14 +103,14 @@ export default function ContactPage() {
                   className="card contact-card"
                 >
                   {content}
-                </a>
+                </SpotlightCard>
               )
             }
 
             return (
-              <div key={info.label} className="card contact-card">
+              <SpotlightCard key={info.label} className="card contact-card">
                 {content}
-              </div>
+              </SpotlightCard>
             )
           })}
         </div>
@@ -156,7 +160,8 @@ export default function ContactPage() {
             required
           />
 
-          <motion.button
+          <MagnetButton
+            as={motion.button}
             type="submit"
             className="btn"
             disabled={status.type === 'sending'}
@@ -164,7 +169,7 @@ export default function ContactPage() {
             whileTap={{ scale: 0.98 }}
           >
             {status.type === 'sending' ? 'Sending...' : 'Send Message'}
-          </motion.button>
+          </MagnetButton>
 
           {status.message && (
             <p className={status.type === 'error' ? 'error-text' : 'success-text'}>{status.message}</p>

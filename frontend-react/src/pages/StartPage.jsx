@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import ThreeScene from '../components/ThreeScene'
+import MagnetButton from '../components/reactbits/MagnetButton'
+import ShinyText from '../components/reactbits/ShinyText'
 
 export default function StartPage() {
   const navigate = useNavigate()
@@ -63,7 +65,8 @@ export default function StartPage() {
           Dharaneesh N | Tech Enthusiast | Developer | Innovator
         </motion.p>
 
-        <motion.button
+        <MagnetButton
+          as={motion.button}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 1.6 }}
@@ -72,8 +75,8 @@ export default function StartPage() {
           className="btn"
           onClick={() => navigate('/home')}
         >
-          Explore Portfolio
-        </motion.button>
+          <ShinyText>Explore Portfolio</ShinyText>
+        </MagnetButton>
       </motion.div>
     </div>
   )
