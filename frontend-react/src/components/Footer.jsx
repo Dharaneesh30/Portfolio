@@ -11,8 +11,8 @@ export default function Footer() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
         style={{
-          borderTop: '1px solid #00FF41',
-          backgroundColor: '#000000',
+          borderTop: '1px solid var(--accent-color)',
+          backgroundColor: 'var(--footer-bg)',
           padding: '2.5rem 2rem',
           marginTop: '4rem',
         }}

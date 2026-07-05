@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import './index.css'
 import App from './App'
+import { ThemeProvider } from './contexts/ThemeContext'
 import StartPage from './pages/StartPage'
 import HomePage from './pages/HomePage'
 import ProjectsPage from './pages/ProjectsPage'
@@ -37,6 +38,8 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 )

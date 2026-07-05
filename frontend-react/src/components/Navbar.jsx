@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { FiMoon, FiSun } from 'react-icons/fi'
+import { useTheme } from '../contexts/ThemeContext'
+import MagnetButton from './reactbits/MagnetButton'
+import ShinyText from './reactbits/ShinyText'
 
 const NAV_ITEMS = [
   { to: '/home', label: 'Home' },
@@ -12,6 +16,8 @@ const NAV_ITEMS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
+  const { theme, toggleTheme } = useTheme()
+  const isLight = theme === 'light'
 
   return (
     <motion.nav
@@ -25,9 +31,9 @@ export default function Navbar() {
         right: 0,
         zIndex: 100,
         backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid #00FF41',
-        backgroundColor: 'rgba(0, 0, 0, 0.78)',
-        boxShadow: '0 0 20px rgba(0, 255, 65, 0.1)',
+        borderBottom: '1px solid var(--accent-color)',
+        backgroundColor: 'var(--nav-bg)',
+        boxShadow: 'var(--nav-shadow)',
       }}
     >
       <div
@@ -61,20 +67,20 @@ export default function Navbar() {
             style={{
               width: '40px',
               height: '40px',
-              border: '2px solid #00FF41',
+              border: '2px solid var(--accent-color)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '4px',
-              color: '#00FF41',
+              color: 'var(--accent-color)',
               fontWeight: 'bold',
-              boxShadow: '0 0 15px rgba(0, 255, 65, 0.3)',
+              boxShadow: 'var(--mark-shadow)',
               flexShrink: 0,
             }}
           >
             DN
           </div>
-          <span className="brand-name" style={{ color: '#00FF41', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em' }}>Dharaneesh</span>
+          <ShinyText className="brand-name" style={{ fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em' }}>Dharaneesh</ShinyText>
         </motion.div>
 
         <div
@@ -86,45 +92,69 @@ export default function Navbar() {
           className="desktop-menu"
         >
           {NAV_ITEMS.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className="nav-link"
-              style={({ isActive }) => ({
-                color: isActive ? '#000000' : '#00FF41',
-                textDecoration: 'none',
-                fontFamily: 'Rajdhani',
-                fontWeight: 600,
-                padding: '0.6rem 1rem',
-                borderRadius: '4px',
-                backgroundColor: isActive ? '#00FF41' : 'transparent',
-                border: `1px solid ${isActive ? '#00FF41' : 'transparent'}`,
-                transition: 'all 0.3s',
-                fontSize: '0.95rem',
-              })}
-            >
-              {item.label}
-            </NavLink>
+            <MagnetButton key={item.to} as={motion.div} strength={0.18}>
+              <NavLink
+                to={item.to}
+                className="nav-link"
+                style={({ isActive }) => ({
+                  color: isActive ? 'var(--accent-contrast)' : 'var(--accent-color)',
+                  textDecoration: 'none',
+                  fontFamily: 'Rajdhani',
+                  fontWeight: 600,
+                  padding: '0.6rem 1rem',
+                  borderRadius: '4px',
+                  backgroundColor: isActive ? 'var(--accent-color)' : 'transparent',
+                  border: `1px solid ${isActive ? 'var(--accent-color)' : 'transparent'}`,
+                  transition: 'all 0.3s',
+                  fontSize: '0.95rem',
+                })}
+              >
+                {item.label}
+              </NavLink>
+            </MagnetButton>
           ))}
+          <MagnetButton
+            as={motion.button}
+            type="button"
+            aria-label={isLight ? 'Switch to dark theme' : 'Switch to light theme'}
+            title={isLight ? 'Dark theme' : 'Light theme'}
+            onClick={toggleTheme}
+            className="theme-toggle"
+          >
+            {isLight ? <FiMoon /> : <FiSun />}
+          </MagnetButton>
         </div>
+
+        <div className="mobile-actions">
+          <MagnetButton
+            as={motion.button}
+            type="button"
+            aria-label={isLight ? 'Switch to dark theme' : 'Switch to light theme'}
+            title={isLight ? 'Dark theme' : 'Light theme'}
+            onClick={toggleTheme}
+            className="theme-toggle"
+          >
+            {isLight ? <FiMoon /> : <FiSun />}
+          </MagnetButton>
 
         <motion.button
           whileTap={{ scale: 0.95 }}
           onClick={() => setMenuOpen((open) => !open)}
           style={{
             background: 'transparent',
-            border: '1px solid #00FF41',
-            color: '#00FF41',
+            border: '1px solid var(--accent-color)',
+            color: 'var(--accent-color)',
             padding: '0.5rem 0.9rem',
             borderRadius: '4px',
             fontSize: '0.95rem',
             cursor: 'pointer',
-            boxShadow: '0 0 10px rgba(0, 255, 65, 0.2)',
+            boxShadow: 'var(--soft-glow)',
           }}
           className="mobile-menu-btn"
         >
           {menuOpen ? 'Close' : 'Menu'}
         </motion.button>
+        </div>
       </div>
 
       {menuOpen && (
@@ -133,8 +163,8 @@ export default function Navbar() {
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
           style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.92)',
-            borderTop: '1px solid #00FF41',
+            backgroundColor: 'var(--mobile-menu-bg)',
+            borderTop: '1px solid var(--accent-color)',
             padding: '1rem 2rem',
             display: 'flex',
             flexDirection: 'column',
@@ -149,14 +179,14 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               className="mobile-nav-link"
               style={({ isActive }) => ({
-                color: isActive ? '#000000' : '#00FF41',
+                color: isActive ? 'var(--accent-contrast)' : 'var(--accent-color)',
                 textDecoration: 'none',
                 fontFamily: 'Rajdhani',
                 fontWeight: 600,
                 padding: '0.75rem 1rem',
                 borderRadius: '4px',
-                backgroundColor: isActive ? '#00FF41' : 'transparent',
-                border: `1px solid ${isActive ? '#00FF41' : 'rgba(0, 255, 65, 0.3)'}`,
+                backgroundColor: isActive ? 'var(--accent-color)' : 'transparent',
+                border: `1px solid ${isActive ? 'var(--accent-color)' : 'var(--soft-border)'}`,
                 transition: 'all 0.3s',
               })}
             >
@@ -173,6 +203,10 @@ export default function Navbar() {
           }
 
           .mobile-menu-btn {
+            display: none !important;
+          }
+
+          .mobile-actions {
             display: none !important;
           }
 
