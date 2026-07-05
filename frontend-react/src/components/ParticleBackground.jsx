@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react'
+import { useTheme } from '../contexts/ThemeContext'
 
 export default function ParticleBackground({ isStartPage }) {
   const canvasRef = useRef(null)
+  const { theme } = useTheme()
 
   useEffect(() => {
     if (!canvasRef.current) return
@@ -13,7 +15,13 @@ export default function ParticleBackground({ isStartPage }) {
     canvas.height = window.innerHeight
 
     const particles = []
-    const particleCount = isStartPage ? 150 : 50
+    const particleCount = isStartPage ? 95 : 42
+    const lineDistance = isStartPage ? 135 : 120
+    const lineStep = isStartPage ? 2 : 1
+
+    const getThemeColor = (name) => (
+      getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+    )
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -29,7 +37,10 @@ export default function ParticleBackground({ isStartPage }) {
     let animationFrameId = 0
 
     const animate = () => {
-      ctx.fillStyle = '#000000'
+      const bgColor = getThemeColor('--bg-color') || '#000000'
+      const particleColor = getThemeColor('--particle-rgb') || '0, 255, 65'
+
+      ctx.fillStyle = bgColor
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       particles.forEach(particle => {
@@ -41,21 +52,21 @@ export default function ParticleBackground({ isStartPage }) {
         if (particle.y < 0) particle.y = canvas.height
         if (particle.y > canvas.height) particle.y = 0
 
-        ctx.fillStyle = `rgba(0, 255, 65, ${particle.opacity})`
+        ctx.fillStyle = `rgba(${particleColor}, ${particle.opacity})`
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
         ctx.fill()
       })
 
       // Draw connecting lines
-      for (let i = 0; i < particles.length; i++) {
+      for (let i = 0; i < particles.length; i += lineStep) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
           const dy = particles[i].y - particles[j].y
           const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 150) {
-            ctx.strokeStyle = `rgba(0, 255, 65, ${(1 - distance / 150) * 0.2})`
+          if (distance < lineDistance) {
+            ctx.strokeStyle = `rgba(${particleColor}, ${(1 - distance / lineDistance) * 0.18})`
             ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
@@ -80,7 +91,7 @@ export default function ParticleBackground({ isStartPage }) {
       window.removeEventListener('resize', handleResize)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [isStartPage])
+  }, [isStartPage, theme])
 
   return (
     <canvas
