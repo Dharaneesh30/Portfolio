@@ -14,10 +14,10 @@ export default function AnimatedContent({
 
   return (
     <Component
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y, scale: 0.95, rotate: -2 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
       viewport={{ once: true, amount }}
-      transition={{ duration: 0.45, delay }}
+      transition={{ type: 'spring', stiffness: 320, damping: 24, delay }}
       className={className}
       {...props}
     >

@@ -111,13 +111,19 @@ export default function ResumePage() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 24, scale: 0.985 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -24, scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 240, damping: 24 }}
       className="page-container"
       data-page="resume"
     >
-      <div className="page-header-row">
+      <motion.div
+        className="page-header-row"
+        initial={{ opacity: 0, y: 20, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 240, damping: 24, delay: 0.06 }}
+      >
         <div>
           <p className="eyebrow">Resume</p>
           <SplitText as="h1" className="hero-title small-title" text="Professional Snapshot" />
@@ -131,14 +137,14 @@ export default function ResumePage() {
         >
           <ShinyText>Download PDF</ShinyText>
         </MagnetButton>
-      </div>
+      </motion.div>
 
       <motion.section
         ref={resumeRef}
         className="card resume-shell"
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45 }}
+        initial={{ opacity: 0, y: 24, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 240, damping: 24, delay: 0.12 }}
       >
         <div className="resume-header">
           <h2>Dharaneesh N</h2>

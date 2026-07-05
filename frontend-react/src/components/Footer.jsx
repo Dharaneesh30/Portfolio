@@ -6,12 +6,12 @@ export default function Footer() {
 
   return (
     <motion.footer
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 20, scale: 0.985 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      transition={{ type: 'spring', stiffness: 220, damping: 24 }}
         style={{
-          borderTop: '1px solid var(--accent-color)',
+          borderTop: '1px solid var(--soft-border)',
           backgroundColor: 'var(--footer-bg)',
           padding: '2.5rem 2rem',
           marginTop: '4rem',

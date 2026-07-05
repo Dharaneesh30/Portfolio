@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaPhone, FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
 import profileImage from '../../Profile.jpeg'
 
@@ -47,6 +47,23 @@ const certifications = [
   'Lead Generation Messenger Chatbot - Coursera'
 ]
 
+const collaborators = ['FOSS CIT', 'Techgyan', 'Corizo', 'NPTEL']
+
+const testimonials = [
+  {
+    quote: '[PLACEHOLDER: quote from a professor, team lead, or workshop mentor about working with you]',
+    author: '[PLACEHOLDER: name — role, e.g. "FOSS CIT lead"]',
+  },
+  {
+    quote: '[PLACEHOLDER: quote from a professor, team lead, or workshop mentor about working with you]',
+    author: '[PLACEHOLDER: name — role, e.g. "FOSS CIT lead"]',
+  },
+  {
+    quote: '[PLACEHOLDER: quote from a professor, team lead, or workshop mentor about working with you]',
+    author: '[PLACEHOLDER: name — role, e.g. "FOSS CIT lead"]',
+  },
+]
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -59,16 +76,20 @@ const containerVariants = {
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } },
 }
 
 export default function HomePage() {
+  const { scrollYProgress } = useScroll()
+  const heroParallax = useTransform(scrollYProgress, [0, 0.28], [0, -18])
+  const imageParallax = useTransform(scrollYProgress, [0, 0.22], [0, -10])
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 24, scale: 0.985 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -24, scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 240, damping: 24 }}
       className="page-container"
       data-page="home"
     >
@@ -79,16 +100,30 @@ export default function HomePage() {
         animate="visible"
       >
         <div className="hero-grid">
-          <motion.div variants={itemVariants} className="profile-photo-shell profile-photo-square-shell">
+          <motion.div variants={itemVariants} className="profile-photo-shell profile-photo-square-shell" style={{ y: imageParallax }}>
             <img src={profileImage} alt="Dharaneesh N" className="profile-image" />
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="narrative-intro" style={{ y: heroParallax }}>
             <p className="eyebrow">About Me</p>
             <SplitText as="h1" className="hero-title" text="Dharaneesh N" />
-            <p className="hero-subtitle">
-              Full-stack developer focused on clean interfaces, practical systems, and modern web tools.
+            <p className="identity-statement">
+              I’m a student developer who loves turning ideas into thoughtful digital experiences.
             </p>
+
+            <div className="about-copy-stack">
+              <p>
+                I build practical web products and enjoy shaping interfaces that feel clear, useful, and human.
+                My work spans React, Python, FastAPI, and frontend storytelling, with a strong focus on experiences that make everyday tasks easier.
+              </p>
+              <p>
+                I approach problems by understanding the context first, simplifying the experience, and refining the details until the solution feels calm and intentional.
+                I care about usability, momentum, and building things that people actually enjoy using.
+              </p>
+              <p>
+                Right now I’m learning [PLACEHOLDER: what you're learning or excited about right now] and I’m especially excited by projects that sit at the intersection of design, AI, and practical tools.
+              </p>
+            </div>
 
             <div className="contact-pills">
               <span className="icon-link static-pill">
@@ -100,19 +135,31 @@ export default function HomePage() {
               <a href="mailto:dharaneesh0530@gmail.com" className="icon-link">
                 <FaEnvelope /> Email
               </a>
-              <a href="https://www.linkedin.com/in/dharaneesh-n-292b30317" target="_blank" rel="noreferrer" className="icon-link">
+              <MagnetButton as={motion.a} strength={0.16} href="https://www.linkedin.com/in/dharaneesh-n-292b30317" target="_blank" rel="noreferrer" className="icon-link">
                 <FaLinkedin /> LinkedIn
-              </a>
-              <a href="https://github.com/Dharaneesh30" target="_blank" rel="noreferrer" className="icon-link">
+              </MagnetButton>
+              <MagnetButton as={motion.a} strength={0.16} href="https://github.com/Dharaneesh30" target="_blank" rel="noreferrer" className="icon-link">
                 <FaGithub /> GitHub
-              </a>
+              </MagnetButton>
             </div>
-
-            <p className="intro-copy">
-              Passionate tech enthusiast with experience in React, Python, FastAPI, and frontend design.
-              I enjoy building useful products, improving user experience, and learning through real projects.
-            </p>
           </motion.div>
+        </div>
+      </motion.section>
+
+      <div className="green-divider" />
+
+      <motion.section
+        className="section"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="context-strip">
+          {collaborators.map((item) => (
+            <AnimatedContent as={motion.span} key={item} className="context-pill" variants={itemVariants}>
+              {item}
+            </AnimatedContent>
+          ))}
         </div>
       </motion.section>
 
@@ -137,6 +184,25 @@ export default function HomePage() {
                   <>Score: <CountUp value={92} suffix="%" /></>
                 )}
               </p>
+            </SpotlightCard>
+          ))}
+        </div>
+      </motion.section>
+
+      <div className="green-divider" />
+
+      <motion.section
+        className="section"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <SplitText as="h2" className="section-heading" text="What People Say" />
+        <div className="testimonial-grid">
+          {testimonials.map((item) => (
+            <SpotlightCard as={motion.article} key={item.author} className="card testimonial-card" variants={itemVariants}>
+              <p className="testimonial-quote">“{item.quote}”</p>
+              <p className="testimonial-author">{item.author}</p>
             </SpotlightCard>
           ))}
         </div>

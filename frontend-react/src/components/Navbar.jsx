@@ -15,23 +15,38 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [easterEggCount, setEasterEggCount] = useState(0)
+  const [easterEggMessage, setEasterEggMessage] = useState('')
   const navigate = useNavigate()
   const { theme, toggleTheme } = useTheme()
   const isLight = theme === 'light'
 
+  const handleBrandClick = () => {
+    const nextCount = easterEggCount + 1
+    setEasterEggCount(nextCount)
+
+    if (nextCount >= 5) {
+      setEasterEggMessage('Curious mind engaged ✨')
+      window.setTimeout(() => setEasterEggMessage(''), 1800)
+      setEasterEggCount(0)
+    }
+
+    navigate('/home')
+  }
+
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+      initial={{ y: -96, opacity: 0, scale: 0.985 }}
+      animate={{ y: 0, opacity: 1, scale: 1 }}
+      transition={{ type: 'spring', stiffness: 220, damping: 24 }}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 100,
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid var(--accent-color)',
+        backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid var(--soft-border)',
         backgroundColor: 'var(--nav-bg)',
         boxShadow: 'var(--nav-shadow)',
       }}
@@ -50,15 +65,15 @@ export default function Navbar() {
       >
         <motion.div
           className="brand-lockup"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => navigate('/home')}
+          whileHover={{ scale: 1.05, y: -2, rotate: -0.6 }}
+          whileTap={{ scale: 0.95, rotate: 0.4 }}
+          onClick={handleBrandClick}
           style={{
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '0.75rem',
-            fontFamily: 'Orbitron',
+            fontFamily: 'var(--font-display)',
             minWidth: 0,
           }}
         >
@@ -67,20 +82,23 @@ export default function Navbar() {
             style={{
               width: '40px',
               height: '40px',
-              border: '2px solid var(--accent-color)',
+              border: '1px solid var(--accent-color)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              borderRadius: '4px',
+              borderRadius: '0.5rem',
               color: 'var(--accent-color)',
-              fontWeight: 'bold',
-              boxShadow: 'var(--mark-shadow)',
+              fontWeight: '700',
+              boxShadow: 'none',
               flexShrink: 0,
             }}
           >
             DN
           </div>
-          <ShinyText className="brand-name" style={{ fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em' }}>Dharaneesh</ShinyText>
+          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+            <ShinyText className="brand-name" style={{ fontSize: '1.08rem', fontWeight: 700, letterSpacing: '0.01em' }}>Dharaneesh</ShinyText>
+            {easterEggMessage && <span className="brand-egg">{easterEggMessage}</span>}
+          </div>
         </motion.div>
 
         <div
@@ -97,9 +115,9 @@ export default function Navbar() {
                 to={item.to}
                 className="nav-link"
                 style={({ isActive }) => ({
-                  color: isActive ? 'var(--accent-contrast)' : 'var(--accent-color)',
+                  color: isActive ? 'var(--accent-contrast)' : 'var(--text-color)',
                   textDecoration: 'none',
-                  fontFamily: 'Rajdhani',
+                  fontFamily: 'var(--font-body)',
                   fontWeight: 600,
                   padding: '0.6rem 1rem',
                   borderRadius: '4px',
@@ -141,14 +159,14 @@ export default function Navbar() {
           whileTap={{ scale: 0.95 }}
           onClick={() => setMenuOpen((open) => !open)}
           style={{
-            background: 'transparent',
-            border: '1px solid var(--accent-color)',
+            background: 'var(--pill-bg)',
+            border: '1px solid var(--soft-border)',
             color: 'var(--accent-color)',
             padding: '0.5rem 0.9rem',
-            borderRadius: '4px',
+            borderRadius: '0.5rem',
             fontSize: '0.95rem',
             cursor: 'pointer',
-            boxShadow: 'var(--soft-glow)',
+            boxShadow: 'none',
           }}
           className="mobile-menu-btn"
         >
@@ -179,9 +197,9 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               className="mobile-nav-link"
               style={({ isActive }) => ({
-                color: isActive ? 'var(--accent-contrast)' : 'var(--accent-color)',
+                color: isActive ? 'var(--accent-contrast)' : 'var(--text-color)',
                 textDecoration: 'none',
-                fontFamily: 'Rajdhani',
+                fontFamily: 'var(--font-body)',
                 fontWeight: 600,
                 padding: '0.75rem 1rem',
                 borderRadius: '4px',

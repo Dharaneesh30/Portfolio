@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -26,7 +27,17 @@ export default function App(){
           style={{ paddingTop: isStartPage ? 0 : '96px' }}
           className="focus:outline-none"
         >
-          <Outlet />
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 24, scale: 0.985 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -24, scale: 0.985 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </main>
         {!isStartPage && <Footer />}
       </div>

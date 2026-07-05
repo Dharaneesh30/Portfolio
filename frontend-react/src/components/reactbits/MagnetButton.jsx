@@ -8,6 +8,9 @@ export default function MagnetButton({
   style,
   onMouseMove,
   onMouseLeave,
+  whileHover,
+  whileTap,
+  transition,
   ...props
 }) {
   const ref = useRef(null)
@@ -18,6 +21,9 @@ export default function MagnetButton({
   const springX = useSpring(x, { stiffness: 200, damping: 14 })
   const springY = useSpring(y, { stiffness: 200, damping: 14 })
   const MotionComponent = Component
+  const hoverMotion = whileHover ?? { scale: 1.03, y: -3, rotate: 1 }
+  const tapMotion = whileTap ?? { scale: 0.95, rotate: -1 }
+  const springTransition = transition ?? { type: 'spring', stiffness: 340, damping: 24 }
 
   const handleMouseMove = (event) => {
     onMouseMove?.(event)
@@ -52,6 +58,9 @@ export default function MagnetButton({
       style={{ ...style, x: springX, y: springY }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      whileHover={hoverMotion}
+      whileTap={tapMotion}
+      transition={springTransition}
       {...props}
     >
       {children}

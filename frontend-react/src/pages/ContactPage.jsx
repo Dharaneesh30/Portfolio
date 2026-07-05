@@ -64,9 +64,10 @@ export default function ContactPage() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 24, scale: 0.985 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -24, scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 240, damping: 24 }}
       className="page-container"
       data-page="contact"
     >
@@ -79,7 +80,12 @@ export default function ContactPage() {
       </section>
 
       <div className="contact-layout">
-        <div className="contact-info-stack">
+        <motion.div
+          className="contact-info-stack"
+          initial={{ opacity: 0, y: 24, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 240, damping: 24, delay: 0.08 }}
+        >
           {contactInfo.map((info) => {
             const Icon = info.icon
             const content = (
@@ -95,12 +101,13 @@ export default function ContactPage() {
             if (info.link) {
               return (
                 <SpotlightCard
-                  as="a"
+                  as={MagnetButton}
                   key={info.label}
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noreferrer' : undefined}
                   className="card contact-card"
+                  style={{ textDecoration: 'none' }}
                 >
                   {content}
                 </SpotlightCard>
@@ -113,14 +120,14 @@ export default function ContactPage() {
               </SpotlightCard>
             )
           })}
-        </div>
+        </motion.div>
 
         <motion.form
           onSubmit={handleSubmit}
           className="card contact-form-shell"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
+          initial={{ opacity: 0, y: 24, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 240, damping: 24, delay: 0.12 }}
         >
           <h2 className="form-title">Send A Message</h2>
           <p className="form-copy">

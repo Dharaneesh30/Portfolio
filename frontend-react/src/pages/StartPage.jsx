@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import ThreeScene from '../components/ThreeScene'
 import MagnetButton from '../components/reactbits/MagnetButton'
 import ShinyText from '../components/reactbits/ShinyText'
+import SplitText from '../components/reactbits/SplitText'
 
 export default function StartPage() {
   const navigate = useNavigate()
@@ -27,10 +28,10 @@ export default function StartPage() {
   return (
     <div className="start-shell">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: 24, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -24, scale: 0.985 }}
+        transition={{ type: 'spring', stiffness: 240, damping: 24 }}
         className="start-card"
       >
         <div className="matrix-rain">
@@ -38,28 +39,27 @@ export default function StartPage() {
         </div>
 
         <motion.div
-          initial={{ scale: 0.85, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ scale: 0.9, opacity: 0, y: 24 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 24, delay: 0.16 }}
           className="start-model"
         >
           <ThreeScene />
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="start-title"
+        <motion.div
+          initial={{ opacity: 0, y: 22, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 24, delay: 0.28 }}
         >
-          {text}
+          <SplitText as="h1" className="start-title" text={text || fullText} />
           {text.length < fullText.length && <span className="typing-caret">|</span>}
-        </motion.h1>
+        </motion.div>
 
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 24, delay: 0.72 }}
           className="start-tagline"
         >
           Dharaneesh N | Tech Enthusiast | Developer | Innovator
@@ -67,11 +67,11 @@ export default function StartPage() {
 
         <MagnetButton
           as={motion.button}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1.6 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.96 }}
+          initial={{ opacity: 0, scale: 0.9, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 24, delay: 1.05 }}
+          whileHover={{ scale: 1.03, y: -3, rotate: 1 }}
+          whileTap={{ scale: 0.97, rotate: -1 }}
           className="btn"
           onClick={() => navigate('/home')}
         >
