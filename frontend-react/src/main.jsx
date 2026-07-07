@@ -1,45 +1,13 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router-dom'
-import './index.css'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
-import { ThemeProvider } from './contexts/ThemeContext'
-import StartPage from './pages/StartPage'
-import HomePage from './pages/HomePage'
-import ProjectsPage from './pages/ProjectsPage'
-import ResumePage from './pages/ResumePage'
-import ContactPage from './pages/ContactPage'
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route index element={<StartPage />} />
-      <Route path="home" element={<HomePage />} />
-      <Route path="projects" element={<ProjectsPage />} />
-      <Route path="resume" element={<ResumePage />} />
-      <Route path="contact" element={<ContactPage />} />
-    </Route>
-  ),
-  { 
-    future: { 
-      v7_startTransition: true, 
-      v7_relativeSplatPath: true,
-      v7_fetcherPersist: true,
-      v7_normalizeFormMethod: true,
-      v7_skipActionErrorRevalidation: true
-    } 
-  }
-)
+import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
-  </React.StrictMode>
+    <Router>
+      <App />
+    </Router>
+  </React.StrictMode>,
 )

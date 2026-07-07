@@ -3,18 +3,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        'matrix-black': '#000000',
-        'matrix-dark': '#0a0a0a',
-        'matrix-card': '#0d0d0d',
-        'matrix-green': '#00FF41',
-        'matrix-green-dark': '#00cc33',
-        'matrix-gray': '#e0e0e0',
-        'matrix-muted': '#888888'
+        'iravu-indigo': 'var(--iravu-indigo)',
+        'sandal-ash': 'var(--sandal-ash)',
+        'ilai-ivory': 'var(--ilai-ivory)',
+        'kumkum-vermilion': 'var(--kumkum-vermilion)',
+        'manjal-gold': 'var(--manjal-gold)',
+        'mayil-teal': 'var(--mayil-teal)'
       },
       fontFamily: {
-        orbitron: ['Orbitron', 'sans-serif'],
-        rajdhani: ['Rajdhani', 'sans-serif'],
-        fira: ['Fira Code', 'monospace']
+        catamaran: ['Catamaran', 'sans-serif'],
+        fraunces: ['Fraunces', 'serif'],
+        inter: ['Inter', 'sans-serif'],
+        'noto-tamil': ['Noto Sans Tamil', 'sans-serif'],
+        'plex-mono': ['IBM Plex Mono', 'monospace']
       }
     }
   },

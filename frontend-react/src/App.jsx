@@ -1,46 +1,47 @@
-import React, { useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Outlet, useLocation } from 'react-router-dom'
+import React from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import CustomCursor from './components/CustomCursor'
-import ParticleBackground from './components/ParticleBackground'
+import ScrollProgress from './components/ScrollProgress'
+import TamilBackdrop from './components/TamilBackdrop'
 
-export default function App(){
+// Pages
+import Landing from './pages/Landing'
+import Home from './pages/Home'
+import Projects from './pages/Projects'
+import Skills from './pages/Skills'
+import Journey from './pages/Journey'
+import Contact from './pages/Contact'
+
+function App() {
   const location = useLocation()
-  const isStartPage = location.pathname === '/'
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location])
-
+  const isLanding = location.pathname === '/'
+  
   return (
-    <>
-      <CustomCursor />
-      <ParticleBackground isStartPage={isStartPage} />
-      <div className="min-h-screen overflow-x-clip">
-        <a href="#main" className="sr-only-focusable">Skip to content</a>
-        {!isStartPage && <Navbar />}
-        <main
-          id="main"
-          tabIndex={-1}
-          style={{ paddingTop: isStartPage ? 0 : '96px' }}
-          className="focus:outline-none"
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={location.pathname}
-              initial={{ opacity: 0, y: 24, scale: 0.985 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -24, scale: 0.985 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
-        </main>
-        {!isStartPage && <Footer />}
-      </div>
-    </>
+    <div className="bg-iravu-indigo text-ilai-ivory min-h-screen overflow-x-hidden">
+      {/* Global backgrounds */}
+      <TamilBackdrop showOnLanding={isLanding} />
+      <ScrollProgress hideOnLanding={isLanding} />
+      
+      {/* Navigation - hidden on landing */}
+      {!isLanding && <Navbar />}
+      
+      {/* Main content with top padding for fixed navbar */}
+      <main className={isLanding ? '' : 'pt-16 md:pt-20'}>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/journey" element={<Journey />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+      
+      {/* Footer - hidden on landing */}
+      {!isLanding && <Footer />}
+    </div>
   )
 }
+
+export default App
