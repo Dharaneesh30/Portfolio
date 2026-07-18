@@ -1,10 +1,12 @@
+import React, { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollProgress from './components/ScrollProgress'
 import TamilBackdrop from './components/TamilBackdrop'
-
 // Pages
 import Landing from './pages/Landing'
 import Home from './pages/Home'
@@ -18,6 +20,24 @@ function App() {
   const isLanding = location.pathname === '/'
   
   return (
+    <>
+      <CustomCursor />
+      <ParticleBackground isStartPage={isStartPage} />
+      <div className="min-h-screen overflow-x-clip">
+        <a href="#main" className="sr-only-focusable">Skip to content</a>
+        {!isStartPage && <Navbar />}
+        <main
+          id="main"
+          tabIndex={-1}
+          style={{ paddingTop: isStartPage ? 0 : '96px' }}
+          className="focus:outline-none"
+        >
+          <Outlet />
+        </main>
+        {!isStartPage && <Footer />}
+      </div>
+      <SpeedInsights />
+    </>
     <div className="bg-iravu-indigo text-ilai-ivory min-h-screen overflow-x-hidden">
       {/* Global backgrounds */}
       <TamilBackdrop showOnLanding={isLanding} />
